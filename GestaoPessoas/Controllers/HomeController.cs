@@ -1,8 +1,8 @@
 using System.Diagnostics;
-using Gestão_de_pessoas.Models;
+using GestaoPessoas.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Gestão_de_pessoas.Controllers
+namespace Gestaopessoas.Controllers
 {
     public class HomeController : Controller
     {

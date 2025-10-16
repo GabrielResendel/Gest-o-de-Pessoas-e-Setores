@@ -1,4 +1,4 @@
-namespace Gestão_de_pessoas.Models
+namespace GestaoPessoas.Models
 {
     public class ErrorViewModel
     {
