@@ -62,7 +62,6 @@ Aplicação web desenvolvida em ASP.NET Core MVC com Entity Framework Core e SQL
 
 ### 2️⃣ Clonar o Repositório
 
-```bash
 git clone https://github.com/GabrielResendel/GestaoDePessoas.git
 cd GestaoDePessoas
 3️⃣ Configurar a String de Conexão
