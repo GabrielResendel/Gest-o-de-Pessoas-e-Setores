@@ -5,12 +5,12 @@
 }
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">📊 Relatórios de Desempenho</h2>
+    <h2 class="text-center mb-4"> Relatórios de Desempenho</h2>
 
     <div class="row text-center mb-5">
         <div class="col-md-6">
             <div class="card shadow-sm p-3">
-                <h5 class="text-secondary">🏆 Melhor Funcionário</h5>
+                <h5 class="text-secondary"> Melhor Funcionário</h5>
                 @if (ViewBag.MelhorFuncionario != null)
                 {
                     <h3 class="fw-bold">@ViewBag.MelhorFuncionario.Nome</h3>
@@ -25,7 +25,7 @@
 
         <div class="col-md-6">
             <div class="card shadow-sm p-3">
-                <h5 class="text-secondary">🏢 Melhor Setor</h5>
+                <h5 class="text-secondary"> Melhor Setor</h5>
                 @if (ViewBag.MelhorSetor != null)
                 {
                     <h3 class="fw-bold">@ViewBag.MelhorSetor.Setor</h3>
@@ -40,12 +40,12 @@
     </div>
 
     <div class="card shadow p-4 mb-5">
-        <h4 class="text-center mb-3">📈 Desempenho Médio por Setor</h4>
+        <h4 class="text-center mb-3"> Desempenho Médio por Setor</h4>
         <canvas id="graficoSetores" height="100"></canvas>
     </div>
 
     <div class="card shadow p-4">
-        <h4 class="text-center mb-3">👥 Funcionários por Setor</h4>
+        <h4 class="text-center mb-3"> Funcionários por Setor</h4>
         <table class="table table-striped align-middle text-center">
             <thead class="table-dark">
                 <tr>

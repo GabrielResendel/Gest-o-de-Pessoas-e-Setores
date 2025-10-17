@@ -15,7 +15,7 @@ namespace GestaoPessoas.Controllers
             _context = context;
         }
 
-        // GET: Metas
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +25,7 @@ namespace GestaoPessoas.Controllers
             return View(metas);
         }
 
-        // GET: Metas/Details/5
+       
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,7 +42,7 @@ namespace GestaoPessoas.Controllers
             return View(meta);
         }
 
-        // GET: Metas/Create
+        
         [HttpGet]
         public IActionResult Create()
         {
@@ -50,7 +50,7 @@ namespace GestaoPessoas.Controllers
             return View();
         }
 
-        // POST: Metas/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Meta meta)
@@ -66,7 +66,7 @@ namespace GestaoPessoas.Controllers
             return View(meta);
         }
 
-        // GET: Metas/Edit/5
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,7 +81,7 @@ namespace GestaoPessoas.Controllers
             return View(meta);
         }
 
-        // POST: Metas/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Meta meta)
@@ -110,7 +110,7 @@ namespace GestaoPessoas.Controllers
             return View(meta);
         }
 
-        // GET: Metas/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,7 +130,7 @@ namespace GestaoPessoas.Controllers
             return View(meta);
         }
 
-        // POST: Metas/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -16,7 +16,7 @@ namespace GestaoPessoas.Models
         [Range(1, int.MaxValue, ErrorMessage = "Informe um valor maior que zero.")]
         public int CapacidadeMaximaPessoas  { get; set; }
 
-        //Relação com Funcionarios
+        
         public ICollection<Funcionario>? Funcionarios { get; set; }
         public ICollection<Meta>? Metas { get; set; }
 

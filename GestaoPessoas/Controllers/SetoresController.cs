@@ -14,7 +14,7 @@ namespace GestaoPessoas.Controllers
             _context = context;
         }
 
-        // GET: /Setores
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -24,29 +24,35 @@ namespace GestaoPessoas.Controllers
             return View(setores);
         }
 
-        // GET: /Setores/Details/5
+        
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var setor = await _context.Setores
                 .Include(s => s.Funcionarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (setor == null) return NotFound();
+            if (setor == null)
+            {
+                return NotFound();
+            }
 
             return View(setor);
         }
 
-        // GET: /Setores/Create
+        
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /Setores/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Setor setor)
@@ -60,24 +66,33 @@ namespace GestaoPessoas.Controllers
             return View(setor);
         }
 
-        // GET: /Setores/Edit/5
+       
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var setor = await _context.Setores.FindAsync(id);
-            if (setor == null) return NotFound();
+            if (setor == null)
+            {
+                return NotFound();
+            }
 
             return View(setor);
         }
 
-        // POST: /Setores/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Setor setor)
         {
-            if (id != setor.Id) return NotFound();
+            if (id != setor.Id) 
+            { 
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
@@ -101,7 +116,10 @@ namespace GestaoPessoas.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Setores.Any(e => e.Id == id)) return NotFound();
+                    if (!_context.Setores.Any(e => e.Id == id)) 
+                    { 
+                        return NotFound();
+                    }
                     else throw;
                 }
                 return RedirectToAction(nameof(Index));
@@ -109,7 +127,7 @@ namespace GestaoPessoas.Controllers
             return View(setor);
         }
 
-        // GET: /Setores/Delete/5
+        
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -119,12 +137,14 @@ namespace GestaoPessoas.Controllers
                 .Include(s => s.Funcionarios)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (setor == null) return NotFound();
-
+            if (setor == null)
+            {
+                return NotFound();
+            }
             return View(setor);
         }
 
-        // POST: /Setores/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -135,16 +155,19 @@ namespace GestaoPessoas.Controllers
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (setor == null)
-                return NotFound();
+            { 
+               return NotFound();
+            }
+                
 
-            // Verifica se há funcionários vinculados
+            
             if (setor.Funcionarios.Any())
             {
                 TempData["ErrorMessage"] = "Não é possível excluir este setor, pois ainda há funcionários vinculados a ele.";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Verifica se há metas vinculadas
+            
             if (setor.Metas.Any())
             {
                 TempData["ErrorMessage"] = "Não é possível excluir este setor, pois ainda há metas vinculadas a ele.";

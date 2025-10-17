@@ -15,7 +15,7 @@ namespace GestaoPessoas.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Desempenho médio e numero de funcionários por setor
+            
             var desempenhoPorSetor = await _context.Setores
                 .Select(s => new
                 {
@@ -27,7 +27,7 @@ namespace GestaoPessoas.Controllers
                 })
                 .ToListAsync();
 
-            // Melhor funcionário
+            
             var melhorFuncionario = await _context.Funcionarios
                 .Select(f => new
                 {
@@ -37,16 +37,16 @@ namespace GestaoPessoas.Controllers
                 .OrderByDescending(f => f.Media)
                 .FirstOrDefaultAsync();
 
-            // Melhor setor (com base na média)
+            
             var melhorSetor = desempenhoPorSetor
                 .OrderByDescending(s => s.Media)
                 .FirstOrDefault();
 
-            // Dados para o gráfico
+           
             ViewBag.Labels = desempenhoPorSetor.Select(s => s.Setor).ToArray();
             ViewBag.Valores = desempenhoPorSetor.Select(s => s.Media).ToArray();
 
-            // Tabela
+            
             ViewBag.DadosTabela = desempenhoPorSetor;
 
             ViewBag.MelhorFuncionario = melhorFuncionario;

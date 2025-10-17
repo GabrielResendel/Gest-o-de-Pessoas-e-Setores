@@ -13,7 +13,7 @@ namespace GestaoPessoas.Models
         [Display(Name = "Pontuação Obtida")]
         public int PontuacaoObtida { get; set; }
 
-        // Relação com Funcionário
+        
         [Required]
         [Display(Name = "Funcionário")]
         public int FuncionarioId { get; set; }
@@ -21,7 +21,7 @@ namespace GestaoPessoas.Models
         [ForeignKey("FuncionarioId")]
         public Funcionario? Funcionario { get; set; }
 
-        // Relação com Meta
+        
         [Required]
         [Display(Name = "Meta")]
         public int? MetaId { get; set; }

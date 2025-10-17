@@ -16,7 +16,7 @@ namespace GestaoPessoas.Models
         [Range(0,1000, ErrorMessage = "Informe uma pontuação válida")]
         public int PontuacaoMaxima { get; set; }
 
-        // Relação com Setor e desempenho
+        
         [Required]
         [Display(Name = "Setor")]
         public int SetorId { get; set; }

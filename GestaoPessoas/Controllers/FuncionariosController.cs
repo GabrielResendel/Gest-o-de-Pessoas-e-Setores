@@ -15,7 +15,7 @@ namespace GestaoPessoas.Controllers
             _context = context;
         }
 
-        // GET: /Funcionarios
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,22 +25,27 @@ namespace GestaoPessoas.Controllers
             return View(funcionarios);
         }
 
-        // GET: /Funcionarios/Details/5
+        
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var funcionario = await _context.Funcionarios
                 .Include(f => f.Setor)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
-            if (funcionario == null) return NotFound();
-
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
             return View(funcionario);
         }
 
-        // GET: /Funcionarios/Create
+        
         [HttpGet]
         public IActionResult Create()
         {
@@ -48,7 +53,7 @@ namespace GestaoPessoas.Controllers
             return View();
         }
 
-        // POST: /Funcionarios/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Funcionario funcionario)
@@ -83,25 +88,34 @@ namespace GestaoPessoas.Controllers
         }
 
 
-        // GET: /Funcionarios/Edit/5
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var funcionario = await _context.Funcionarios.FindAsync(id);
-            if (funcionario == null) return NotFound();
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
 
             ViewData["SetorId"] = new SelectList(_context.Setores, "Id", "Nome", funcionario.SetorId);
             return View(funcionario);
         }
 
-        // POST: /Funcionarios/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Funcionario funcionario)
         {
-            if (id != funcionario.Id) return NotFound();
+            if (id != funcionario.Id)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
@@ -131,9 +145,14 @@ namespace GestaoPessoas.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!_context.Funcionarios.Any(e => e.Id == funcionario.Id))
+                    {
                         return NotFound();
+                    }
                     else
+                    { 
                         throw;
+                    }
+                        
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -143,7 +162,7 @@ namespace GestaoPessoas.Controllers
         }
 
 
-        // GET: Funcionarios/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -152,12 +171,15 @@ namespace GestaoPessoas.Controllers
                 .Include(f => f.Setor)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
-            if (funcionario == null) return NotFound();
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
 
             return View(funcionario);
         }
 
-        // POST: Funcionarios/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

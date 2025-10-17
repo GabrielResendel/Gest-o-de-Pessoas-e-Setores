@@ -25,14 +25,14 @@ namespace GestaoPessoas.Models
         [Display(Name = "Data de Admissão")]
         public DateTime DataAdmissao { get; set; }
 
-        //Relação com Setor
+        
         [Display(Name = "Setor")]
         public int SetorId { get; set; }
 
         [ForeignKey("SetorId")]
         public Setor? Setor { get; set; }
 
-        //relação com desempenho
+        
         public ICollection<Desempenho>? Desempenhos { get; set; }
 
     }

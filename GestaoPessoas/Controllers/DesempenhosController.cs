@@ -15,7 +15,7 @@ namespace GestaoPessoas.Controllers
             _context = context;
         }
 
-        // GET: Desempenhos
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -27,12 +27,14 @@ namespace GestaoPessoas.Controllers
             return View(desempenhos);
         }
 
-        // GET: Desempenhos/Details/5
+        
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
+            {
                 return NotFound();
+            }
 
             var desempenho = await _context.Desempenhos
                 .Include(d => d.Funcionario)
@@ -40,12 +42,14 @@ namespace GestaoPessoas.Controllers
                 .FirstOrDefaultAsync(d => d.Id == id);
 
             if (desempenho == null)
+            {
                 return NotFound();
+            }
 
             return View(desempenho);
         }
 
-        // GET: Desempenhos/Create
+        
         [HttpGet]
         public IActionResult Create()
         {
@@ -54,7 +58,7 @@ namespace GestaoPessoas.Controllers
             return View();
         }
 
-        // POST: Desempenhos/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Desempenho desempenho)
@@ -81,7 +85,7 @@ namespace GestaoPessoas.Controllers
             return View(desempenho);
         }
 
-        // GET: Desempenhos/Edit/5
+        
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -90,20 +94,24 @@ namespace GestaoPessoas.Controllers
 
             var desempenho = await _context.Desempenhos.FindAsync(id);
             if (desempenho == null)
+            {
                 return NotFound();
+            }
 
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", desempenho.FuncionarioId);
             ViewData["MetaId"] = new SelectList(_context.Metas, "Id", "Descricao", desempenho.MetaId);
             return View(desempenho);
         }
 
-        // POST: Desempenhos/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Desempenho desempenho)
         {
             if (id != desempenho.Id)
+            {
                 return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
@@ -124,9 +132,14 @@ namespace GestaoPessoas.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!_context.Desempenhos.Any(e => e.Id == desempenho.Id))
+                    {
                         return NotFound();
+                    }
                     else
+                    {
                         throw;
+                    }
+                        
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -136,29 +149,38 @@ namespace GestaoPessoas.Controllers
             return View(desempenho);
         }
 
-        // GET: /Desempenhos/Delete/5
+        
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var desempenho = await _context.Desempenhos
                 .Include(d => d.Funcionario)
                 .Include(d => d.Meta)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (desempenho == null) return NotFound();
+            if (desempenho == null)
+            {
+                return NotFound();
+            }
 
             return View(desempenho);
         }
 
-        // POST: /Desempenhos/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var desempenho = await _context.Desempenhos.FindAsync(id);
-            if (desempenho == null) return NotFound();
+            if (desempenho == null)
+            {
+                return NotFound();
+            }
 
             _context.Desempenhos.Remove(desempenho);
             await _context.SaveChangesAsync();

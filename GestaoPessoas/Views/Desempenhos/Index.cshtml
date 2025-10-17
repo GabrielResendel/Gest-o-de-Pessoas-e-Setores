@@ -4,7 +4,7 @@
     ViewData["Title"] = "Desempenhos";
 }
 
-<h1 class="mb-4 text-primary">📊 Desempenhos</h1>
+<h1 class="mb-4 text-primary"> Desempenhos</h1>
 
 @if (TempData["ErrorMessage"] != null)
 {
@@ -22,7 +22,7 @@
 }
 
 <p>
-    <a asp-action="Create" class="btn btn-primary mb-3">➕ Novo Registro de Desempenho</a>
+    <a asp-action="Create" class="btn btn-primary mb-3"> Novo Registro de Desempenho</a>
 </p>
 
 <table class="table table-hover align-middle">
@@ -42,9 +42,9 @@
                 <td>@item.Meta?.Descricao</td>
                 <td>@item.PontuacaoObtida</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">✏️</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">🔍</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-delete">🗑️ Excluir</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-delete"> Excluir</a>
 
                 </td>
             </tr>
