@@ -4,7 +4,7 @@ Aplicação web desenvolvida em ASP.NET Core MVC com Entity Framework Core e SQL
 
 ---
 
-## 📋 Funcionalidades Principais
+##  Funcionalidades Principais
 
  **Cadastro de Setores** 
 - Define o nome e capacidade máxima de pessoas  
@@ -37,7 +37,7 @@ Aplicação web desenvolvida em ASP.NET Core MVC com Entity Framework Core e SQL
 
 ---
 
-## 🧰 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 | Camada | Tecnologia |
 |:-------|:------------|
@@ -50,9 +50,9 @@ Aplicação web desenvolvida em ASP.NET Core MVC com Entity Framework Core e SQL
 
 ---
 
-## ⚙️ Como Executar o Projeto Localmente
+##  Como Executar o Projeto Localmente
 
-### 1️⃣ Pré-requisitos
+### 1 Pré-requisitos
 
 - [.NET SDK 8.0](https://dotnet.microsoft.com/en-us/download) (ou superior)  
 - SQL Server ou LocalDB instalado  
@@ -60,11 +60,12 @@ Aplicação web desenvolvida em ASP.NET Core MVC com Entity Framework Core e SQL
 
 ---
 
-### 2️⃣ Clonar o Repositório
+### 2 Clonar o Repositório
 
 git clone https://github.com/GabrielResendel/GestaoDePessoas.git
 cd GestaoDePessoas
-3️⃣ Configurar a String de Conexão
+
+3 Configurar a String de Conexão
 Abra o arquivo appsettings.json e ajuste conforme seu ambiente:
 
 json
@@ -74,7 +75,7 @@ Copiar código
 }
 Se estiver usando outro SQL Server, altere o Server e o Database conforme necessário.
 
-4️⃣ Criar o Banco de Dados
+4 Criar o Banco de Dados
 Execute o comando:
 
 bash
@@ -82,54 +83,16 @@ Copiar código
 dotnet ef database update
 Isso criará automaticamente as tabelas com base nos modelos (Code First).
 
-5️⃣ Rodar o Projeto
+5 Rodar o Projeto
 bash
 Copiar código
 dotnet run
-Ou, pelo Visual Studio, clique em ▶️ “Executar”.
+Ou, pelo Visual Studio, clique em  “Executar”.
 
 Acesse no navegador:
 👉 http://localhost:5000 ou https://localhost:5001
 
-🧭 Estrutura do Projeto
-vbnet
-Copiar código
-GestaoDePessoas/
-├── Controllers/
-│   ├── DashboardController.cs
-│   ├── DesempenhosController.cs
-│   ├── FuncionariosController.cs
-│   ├── MetasController.cs
-│   ├── RelatoriosController.cs
-│   ├── SetoresController.cs
-│   └── HomeController.cs
-│
-├── Models/
-│   ├── Setor.cs
-│   ├── Funcionario.cs
-│   ├── Meta.cs
-│   └── Desempenho.cs
-│
-├── Data/
-│   └── GestaoPessoasContext.cs
-│
-├── Views/
-│   ├── Dashboard/
-│   ├── Desempenhos/
-│   ├── Funcionarios/
-│   ├── Metas/
-│   ├── Relatorios/
-│   ├── Setores/
-│   └── Shared/
-│
-├── wwwroot/
-│   ├── css/
-│   ├── js/
-│   └── lib/
-│
-├── appsettings.json
-├── Program.cs
-└── README.md
+
 
  **Como Utilizar o Sistema**
 Acesse o Dashboard: veja total de funcionários, setor destaque e melhor funcionário.
