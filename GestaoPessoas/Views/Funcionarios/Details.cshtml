@@ -1,0 +1,28 @@
+﻿@model GestaoPessoas.Models.Funcionario
+@{
+    ViewData["Title"] = "Detalhes do Funcionário";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Detalhes do Funcionário</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nome</dt>
+        <dd class="col-sm-9">@Model.Nome</dd>
+
+        <dt class="col-sm-3">Cargo</dt>
+        <dd class="col-sm-9">@Model.Cargo</dd>
+
+        <dt class="col-sm-3">Salário</dt>
+        <dd class="col-sm-9">@Model.Salario.ToString("C")</dd>
+
+        <dt class="col-sm-3">Data de Admissão</dt>
+        <dd class="col-sm-9">@Model.DataAdmissao.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Setor</dt>
+        <dd class="col-sm-9">@Model.Setor?.Nome</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</div>

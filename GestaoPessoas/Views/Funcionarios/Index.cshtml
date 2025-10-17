@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GestaoPessoas.Models.Funcionario>
+
+@{
+    ViewData["Title"] = "Funcionários";
+}
+
+<h1 class="mb-4 text-primary">👥 Funcionários</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary mb-3">➕ Novo Funcionário</a>
+</p>
+
+<table class="table table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Salário</th>
+            <th>Data Admissão</th>
+            <th>Setor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Cargo</td>
+                <td>R$ @item.Salario.ToString("N2")</td>
+                <td>@item.DataAdmissao.ToShortDateString()</td>
+                <td>@item.Setor?.Nome</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">✏️</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">🔍</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-delete">🗑️ Excluir</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

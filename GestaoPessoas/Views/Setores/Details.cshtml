@@ -1,0 +1,36 @@
+﻿@model GestaoPessoas.Models.Setor
+@{
+    ViewData["Title"] = "Detalhes do Setor";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Detalhes do Setor</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nome</dt>
+        <dd class="col-sm-9">@Model.Nome</dd>
+
+        <dt class="col-sm-3">Capacidade Máxima</dt>
+        <dd class="col-sm-9">@Model.CapacidadeMaximaPessoas</dd>
+
+        <dt class="col-sm-3">Funcionários</dt>
+        <dd class="col-sm-9">
+            @if (Model.Funcionarios?.Any() ?? false)
+            {
+                <ul>
+                    @foreach (var f in Model.Funcionarios)
+                    {
+                        <li>@f.Nome - @f.Cargo</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Nenhum funcionário vinculado.</p>
+            }
+        </dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</div>

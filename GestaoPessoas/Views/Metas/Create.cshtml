@@ -1,0 +1,31 @@
+﻿@model GestaoPessoas.Models.Meta
+@{
+    ViewData["Title"] = "Nova Meta";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">➕ Cadastrar Nova Meta</h2>
+
+    <form asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="Descricao" class="form-label"></label>
+            <input asp-for="Descricao" class="form-control" placeholder="Digite a descrição da meta" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PontuacaoMaxima" class="form-label"></label>
+            <input asp-for="PontuacaoMaxima" class="form-control" />
+            <span asp-validation-for="PontuacaoMaxima" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SetorId" class="form-label">Setor</label>
+            <select asp-for="SetorId" class="form-select" asp-items="ViewBag.SetorId"></select>
+            <span asp-validation-for="SetorId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>

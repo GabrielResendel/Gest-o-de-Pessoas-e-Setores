@@ -18,14 +18,14 @@ namespace GestaoPessoas.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            // Lista todos os setores e conta quantos funcionários cada um tem
             var setores = await _context.Setores
-                .Include(s => s.Funcionarios) // inclui a lista de funcionários
+                .Include(s => s.Funcionarios)
                 .ToListAsync();
             return View(setores);
         }
 
         // GET: /Setores/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -40,6 +40,7 @@ namespace GestaoPessoas.Controllers
         }
 
         // GET: /Setores/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -52,7 +53,6 @@ namespace GestaoPessoas.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 _context.Add(setor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -61,6 +61,7 @@ namespace GestaoPessoas.Controllers
         }
 
         // GET: /Setores/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -80,7 +81,6 @@ namespace GestaoPessoas.Controllers
 
             if (ModelState.IsValid)
             {
-                // Validação: não deixar capacidade menor que o número de funcionários atuais
                 var setorExistente = await _context.Setores
                     .Include(s => s.Funcionarios)
                     .FirstOrDefaultAsync(s => s.Id == id);
@@ -110,6 +110,7 @@ namespace GestaoPessoas.Controllers
         }
 
         // GET: /Setores/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -128,11 +129,35 @@ namespace GestaoPessoas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var setor = await _context.Setores.FindAsync(id);
+            var setor = await _context.Setores
+                .Include(s => s.Funcionarios)
+                .Include(s => s.Metas)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (setor == null)
+                return NotFound();
+
+            // Verifica se há funcionários vinculados
+            if (setor.Funcionarios.Any())
+            {
+                TempData["ErrorMessage"] = "Não é possível excluir este setor, pois ainda há funcionários vinculados a ele.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Verifica se há metas vinculadas
+            if (setor.Metas.Any())
+            {
+                TempData["ErrorMessage"] = "Não é possível excluir este setor, pois ainda há metas vinculadas a ele.";
+                return RedirectToAction(nameof(Index));
+            }
+
             _context.Setores.Remove(setor);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Setor excluído com sucesso!";
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }
-

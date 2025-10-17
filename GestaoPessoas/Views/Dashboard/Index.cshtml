@@ -1,0 +1,102 @@
+﻿<div class="row mb-4 text-center">
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Total de Funcionários</h5>
+                <h3 class="fw-bold">@ViewBag.TotalFuncionarios</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <h5 class="card-title text-success">Melhor Funcionário</h5>
+                <h3 class="fw-bold text-success">@ViewBag.MelhorFuncionario</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <h5 class="card-title text-warning">Setor Destaque</h5>
+                <h3 class="fw-bold text-warning">@ViewBag.MelhorSetor</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-center mb-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-3">Pontuação Total por Setor</h5>
+                <div style="position: relative; height: 280px; width: 100%;">
+                    <canvas id="graficoDesempenho"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabela -->
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Funcionários e Pontuações</h5>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Funcionário</th>
+                    <th>Setor</th>
+                    <th>Pontuação Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.FuncionariosPontuacao)
+                {
+                    <tr>
+                        <td>@item.Funcionario</td>
+                        <td>@item.Setor</td>
+                        <td>@item.PontosTotais</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graficoDesempenho').getContext('2d');
+        const dados = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.DadosGrafico));
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dados.map(d => d.Setor),
+                datasets: [{
+                    label: 'Pontuação Total',
+                    data: dados.map(d => d.PontosTotais),
+                    backgroundColor: ['#0d6efd', '#20c997', '#ffc107', '#6610f2'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `Pontuação: ${ctx.formattedValue}`
+                        }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+}

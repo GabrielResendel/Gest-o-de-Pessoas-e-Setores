@@ -1,0 +1,22 @@
+﻿@model GestaoPessoas.Models.Desempenho
+@{
+    ViewData["Title"] = "Detalhes do Desempenho";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📋 Detalhes do Desempenho</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Funcionário</dt>
+        <dd class="col-sm-9">@Model.Funcionario?.Nome</dd>
+
+        <dt class="col-sm-3">Meta</dt>
+        <dd class="col-sm-9">@Model.Meta?.Descricao</dd>
+
+        <dt class="col-sm-3">Pontuação Obtida</dt>
+        <dd class="col-sm-9">@Model.PontuacaoObtida</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</div>

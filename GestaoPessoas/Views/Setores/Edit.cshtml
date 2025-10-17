@@ -1,0 +1,25 @@
+﻿@model GestaoPessoas.Models.Setor
+@{
+    ViewData["Title"] = "Editar Setor";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Setor</h2>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CapacidadeMaximaPessoas" class="form-label"></label>
+            <input asp-for="CapacidadeMaximaPessoas" class="form-control" />
+            <span asp-validation-for="CapacidadeMaximaPessoas" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

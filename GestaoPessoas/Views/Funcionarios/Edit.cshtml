@@ -1,0 +1,45 @@
+﻿@model GestaoPessoas.Models.Funcionario
+@{
+    ViewData["Title"] = "Editar Funcionário";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Funcionário</h2>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cargo" class="form-label"></label>
+            <input asp-for="Cargo" class="form-control" />
+            <span asp-validation-for="Cargo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Salario" class="form-label"></label>
+            <input asp-for="Salario" class="form-control" />
+            <span asp-validation-for="Salario" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DataAdmissao" class="form-label"></label>
+            <input asp-for="DataAdmissao" class="form-control" type="date" />
+            <span asp-validation-for="DataAdmissao" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SetorId" class="form-label">Setor</label>
+            <select asp-for="SetorId" class="form-select" asp-items="ViewBag.SetorId"></select>
+            <span asp-validation-for="SetorId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

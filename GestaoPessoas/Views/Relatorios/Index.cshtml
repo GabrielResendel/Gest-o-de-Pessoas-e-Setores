@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Relatórios e Desempenho";
+    var labels = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Labels);
+    var valores = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Valores);
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📊 Relatórios de Desempenho</h2>
+
+    <div class="row text-center mb-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-secondary">🏆 Melhor Funcionário</h5>
+                @if (ViewBag.MelhorFuncionario != null)
+                {
+                    <h3 class="fw-bold">@ViewBag.MelhorFuncionario.Nome</h3>
+                    <p>Média: <strong>@ViewBag.MelhorFuncionario.Media.ToString("F2")</strong></p>
+                }
+                else
+                {
+                    <p>Sem dados disponíveis</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-secondary">🏢 Melhor Setor</h5>
+                @if (ViewBag.MelhorSetor != null)
+                {
+                    <h3 class="fw-bold">@ViewBag.MelhorSetor.Setor</h3>
+                    <p>Média: <strong>@ViewBag.MelhorSetor.Media.ToString("F2")</strong></p>
+                }
+                else
+                {
+                    <p>Sem dados disponíveis</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow p-4 mb-5">
+        <h4 class="text-center mb-3">📈 Desempenho Médio por Setor</h4>
+        <canvas id="graficoSetores" height="100"></canvas>
+    </div>
+
+    <div class="card shadow p-4">
+        <h4 class="text-center mb-3">👥 Funcionários por Setor</h4>
+        <table class="table table-striped align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Setor</th>
+                    <th>Funcionários</th>
+                    <th>Média de Desempenho</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in ViewBag.DadosTabela)
+                {
+                    <tr>
+                        <td>@s.Setor</td>
+                        <td>@s.QuantidadeFuncionarios</td>
+                        <td>@s.Media.ToString("F2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graficoSetores').getContext('2d');
+        const graficoSetores = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(labels),
+                datasets: [{
+                    label: 'Média de Desempenho',
+                    data: @Html.Raw(valores),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Pontuação Média' } },
+                    x: { title: { display: true, text: 'Setores' } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { backgroundColor: 'rgba(0,0,0,0.7)' }
+                }
+            }
+        });
+    </script>
+}
+    
